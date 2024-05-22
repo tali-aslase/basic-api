@@ -8,27 +8,27 @@ export class TodosController{
     constructor(private readonly todoService: TodosService){}
 
     @Post()
-    createTodo(@Body() dto: CreateTodoDto ){
-        return this.todoService.create(dto);
+    async create(@Body() dto: CreateTodoDto ){
+        return this.todoService.createTodo(dto);
     }
 
     @Get()
-    getAll(){
-        return this.todoService.getAllTodo();
+    async getAll(){
+        return await this.todoService.getAllTodo();
     }
 
     @Put(':id')
     async  update(@Param('id', ParseIntPipe) id: number, @Body() dto: CreateTodoDto){
-        return await this.todoService.update(id, dto);
+        return await this.todoService.updateTodo(id, dto);
     }
 
     @Delete(':id')
     async delete(@Param('id', ParseIntPipe) id: number){
-        return await this.todoService.deleteOne(id);
+        return await this.todoService.deleteTodo(id);
     }
 
     @Get(':id')
-    async GetOne(@Param('id', ParseIntPipe) id: number){
-        return await this.todoService.getOne(id);
+    async getOne(@Param('id', ParseIntPipe) id: number){
+        return await this.todoService.getTodo(id);
     }
 }

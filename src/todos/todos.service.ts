@@ -9,16 +9,16 @@ export class TodosService{
 
     constructor(@InjectRepository(Todo) private readonly todoRepository: Repository<Todo>){}
 
-    async create(dto: CreateTodoDto ){
+    async createTodo(dto: CreateTodoDto ){
         const todo = this.todoRepository.create(dto);
         return await this.todoRepository.save(todo);
     }
 
     async getAllTodo(){
-        return this.todoRepository.find();
+        return await this.todoRepository.find();
     } 
 
-    async update(id: number , body: CreateTodoDto){
+    async updateTodo(id: number , body: CreateTodoDto){
 
         const todo = await this.todoRepository.findOne({where: {id} });
         if (!todo){
@@ -28,7 +28,7 @@ export class TodosService{
         return await this.todoRepository.save(todo);
     }
 
-    async deleteOne(id: number){
+    async deleteTodo(id: number){
 
         const todo = await this.todoRepository.findOne({where: {id} });
         if (!todo){
@@ -38,7 +38,7 @@ export class TodosService{
         return await this.todoRepository.remove(todo);
     }
 
-    async getOne(id: number){
+    async getTodo(id: number){
 
         const todo = await this.todoRepository.findOne({where: {id} });
         if (!todo){
